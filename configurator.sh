@@ -90,19 +90,12 @@ function handle_velocity() {
 }
 
 
-# Function to handle SPIGOT_BUNGEECORD mode
-function handle_spigot_bungeecord() {
-    echo "Handling SPIGOT_BUNGEECORD mode"
+function handle_spigot() {
+    echo "Handling spigot"
 
     # Use the new function to download
     download_if_not_exists "https://raw.githubusercontent.com/theSimpleCloud/minecraft-configs/main/spigot/server.properties" "${DATA_DIR}/server.properties"
     download_if_not_exists "https://raw.githubusercontent.com/theSimpleCloud/minecraft-configs/main/spigot/spigot.yml" "${DATA_DIR}/spigot.yml"
-
-    # Ensure yq is installed and available
-    if ! command -v yq &> /dev/null; then
-        echo "yq could not be found, please install it."
-        exit 1
-    fi
 
     # Edit server.properties
     sed -i 's/^server-ip=.*$/server-ip=0.0.0.0/' ${DATA_DIR}/server.properties
@@ -110,16 +103,26 @@ function handle_spigot_bungeecord() {
     sed -i 's/^server-port=.*$/server-port=25565/' ${DATA_DIR}/server.properties
     sed -i 's/^online-mode=.*$/online-mode=false/' ${DATA_DIR}/server.properties
 
+    cat ${DATA_DIR}/server.properties
+    cat ${DATA_DIR}/spigot.yml
+}
+
+
+# Function to handle SPIGOT_BUNGEECORD mode
+function handle_spigot_bungeecord() {
+    echo "Handling SPIGOT_BUNGEECORD mode"
+
+    handle_spigot
+
     # Edit spigot.yml
     yq e '.settings.bungeecord = true' -i ${DATA_DIR}/spigot.yml
 
-    cat ${DATA_DIR}/server.properties
     cat ${DATA_DIR}/spigot.yml
 }
 
 # Function to handle PAPER_VELOCITY mode
 function handle_paper_velocity() {
-    handle_spigot_bungeecord
+    handle_spigot
 
     echo "Handling PAPER_VELOCITY mode"
 
