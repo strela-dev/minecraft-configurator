@@ -98,7 +98,7 @@ function handle_spigot() {
     download_if_not_exists "https://raw.githubusercontent.com/theSimpleCloud/minecraft-configs/main/spigot/spigot.yml" "${DATA_DIR}/spigot.yml"
 
     # Edit server.properties
-    sed -i 's/^server-ip=.*$/server-ip=0.0.0.0/' ${DATA_DIR}/server.properties
+    #sed -i 's/^server-ip=.*$/server-ip=0.0.0.0/' ${DATA_DIR}/server.properties
     sed -i "s/^max-players=.*$/max-players=$MAX_PLAYERS/" ${DATA_DIR}/server.properties
     sed -i 's/^server-port=.*$/server-port=25565/' ${DATA_DIR}/server.properties
     sed -i 's/^online-mode=.*$/online-mode=false/' ${DATA_DIR}/server.properties
