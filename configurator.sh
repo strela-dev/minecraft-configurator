@@ -80,7 +80,7 @@ function handle_velocity() {
     sed -i 's/^player-info-forwarding-mode = .*/player-info-forwarding-mode = "modern"/' "${DATA_DIR}/velocity.toml"
 
     # Set haproxy-protocol to true
-    sed -i 's/^haproxy-protocol = .*/haproxy-protocol = true/' "${DATA_DIR}/velocity.toml"
+    # sed -i 's/^haproxy-protocol = .*/haproxy-protocol = true/' "${DATA_DIR}/velocity.toml"
 
     # Write the content of FORWARDING_SECRET to forwarding.secret file
     echo "$FORWARDING_SECRET" > "${DATA_DIR}/forwarding.secret"
